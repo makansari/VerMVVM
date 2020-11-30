@@ -3,6 +3,8 @@ package com.example.vermvvm.view.view_model
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.vermvvm.view.AuthInterface
+import com.example.vermvvm.view.model.Repository.UserRepoistory
+import com.example.vermvvm.view.model.UserData
 
 class AuthViewModel : ViewModel() {
 
@@ -16,7 +18,10 @@ class AuthViewModel : ViewModel() {
             authlistner?.onFailure("Its failed")
         }
         else {
-                authlistner?.onSuccess(" succesful")
+                var userData = UserData(email!!,pwd!!)
+            val myreponse = UserRepoistory().userLogin(userData)
+            authlistner?.onSuccess(myreponse)
+
         }
     }
 }

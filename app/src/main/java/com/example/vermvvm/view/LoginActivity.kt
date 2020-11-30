@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.vermvvm.R
 import com.example.vermvvm.databinding.ActivityMainBinding
@@ -30,8 +32,11 @@ class LoginActivity : AppCompatActivity(),AuthInterface {
 
     }
 
-    override fun onSuccess(success: String) {
-        Toast.makeText(this,"Its success $success",Toast.LENGTH_SHORT).show()
+    override fun onSuccess(success: LiveData<String>) {
+        success.observe(this, Observer {
+            Toast.makeText(this,"made network call $success" + it,Toast.LENGTH_SHORT).show()
+
+        })
 
     }
 }
